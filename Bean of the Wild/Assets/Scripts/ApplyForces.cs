@@ -37,6 +37,11 @@ public class ApplyForces : MonoBehaviour
         }
     }
 
+    public void MultiplyVelocity(float vel)
+    {
+        rb.velocity = (rb.velocity * vel);
+    }
+
     public void StasisFreeze(float stasisTime)
     {
         frozen = true;

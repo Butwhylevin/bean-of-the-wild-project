@@ -5,10 +5,13 @@ using UnityEngine;
 public class RuneRaycaster : MonoBehaviour
 {
     public LayerMask runeInteractive;
-    public Camera cam;
     public float activeRuneNumber; // 1=stasis, 2= magnesis, 3=cryonis, 4=circleBomb, 5=cubeBomb, 6=rewind
     public bool runeActive;
     bool activateInput, useInput, cycleForward, cycleBack;
+
+    [Header("Refrences")]
+    public Camera cam;
+    public MagnesisRune magnesisScript;
 
     [Header("Properties")]
     public float stasisTime = 5f;
@@ -57,10 +60,22 @@ public class RuneRaycaster : MonoBehaviour
                         // stasis rune
                         objectHit.GetComponent<ApplyForces>().StasisFreeze(stasisTime);
                     }
-                    if(activeRuneNumber == 3 && props.hasWater)
+                    else if(activeRuneNumber == 2 && props.hasMagnet)
+                    {
+                        // magnesis rune
+                        // change layer of object hit and disable gravity
+                        objectHit.gameObject.layer = 6;
+                        objectHit.GetComponent<Rigidbody>().useGravity = false;
+                        // set position of magnesis point
+                        magnesisScript.movePoint = true;
+                        // move the hit object towards the point
+                        magnesisScript.forceScript = objectHit.gameObject.GetComponent<ApplyForces>();
+                        
+                    }
+                    else if(activeRuneNumber == 3 && props.hasWater)
                     {
                         // cryonis rune
-                        objectHit.GetComponent<ApplyForces>().StasisFreeze(stasisTime);
+                        // make ice block
                     }
                 }
             }
