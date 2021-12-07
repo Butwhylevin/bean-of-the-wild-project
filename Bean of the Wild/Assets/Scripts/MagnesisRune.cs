@@ -82,6 +82,27 @@ public class MagnesisRune : MonoBehaviour
         pointTransform.LookAt(playerObj.transform);
     }
 
+    public void StartMagnesis(GameObject objectHit)
+    {
+        // change layer of object hit and disable gravity
+        objectHit.gameObject.layer = 6;
+        objectHit.GetComponent<Rigidbody>().useGravity = false;
+        // set position of magnesis point
+        movePoint = true;
+        // move the hit object towards the point
+        forceScript = objectHit.gameObject.GetComponent<ApplyForces>();
+    }
+
+    public void EndMagnesis()
+    {
+        // change layer of object hit and enable gravity
+        forceScript.gameObject.layer = 3;
+        forceScript.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        
+        movePoint = false;
+        forceScript = null; 
+    }
+
     private void ForceTowardsPoint()
     {
         // move the rigidbody of the object towards the point
