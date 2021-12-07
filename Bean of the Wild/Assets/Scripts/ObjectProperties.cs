@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class ObjectProperties : MonoBehaviour
 {
-    public bool hasStasis, hasMagnet, hasWater, isDestructable;
+    public bool hasStasis, hasMagnet, hasWater, isDestructable, hasRewind;
 
 }

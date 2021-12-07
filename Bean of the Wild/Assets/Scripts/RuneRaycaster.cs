@@ -12,6 +12,7 @@ public class RuneRaycaster : MonoBehaviour
     [Header("Refrences")]
     public Camera cam;
     public MagnesisRune magnesisScript;
+    public RewindRune rewindScript;
 
     [Header("Properties")]
     public float stasisTime = 5f;
@@ -76,6 +77,11 @@ public class RuneRaycaster : MonoBehaviour
                     {
                         // cryonis rune
                         // make ice block
+                    }
+                    else if(activeRuneNumber == 6 && props.hasRewind)
+                    {
+                        // rewind rune
+                        rewindScript.DoRewind(objectHit.GetComponent<RewindMovementRecorder>());
                     }
                 }
             }
